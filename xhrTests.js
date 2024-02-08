@@ -114,6 +114,52 @@ function getPlayers(successCallback) {
   xhr.send();
 }
 
+function getPlayerPage(picto, successCallback = {}) {
+  const url = "/machine/playerpage.php?symbol=" + picto;
+  const method = "HEAD";
+
+  // let resquestHeaders = [];
+  // let theCookies = document.cookie.split(';');
+  // theCookies.forEach(cookie => {
+  //   resquestHeaders.push(["Cookie", cookie]);
+  // });
+  let resquestHeaders = [["Cookie", document.cookie]];
+  console.log(resquestHeaders);
+
+  const noCache = true;
+  let xhr = null;
+  if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+  }else{
+    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xhr.onreadystatechange = () => {
+    console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
+  }
+  
+  xhr.ontimeout = () => {
+    console.log("Connection to " + url + "Timed out.");
+  };
+  xhr.open(method, url, true);
+  // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
+  // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
+  console.log(resquestHeaders);
+  resquestHeaders.forEach(pair => {
+    console.log(pair[0] + ":" + pair[1]);
+    xhr.setRequestHeader(pair[0], pair[1]);
+  });
+  if(noCache){
+    xhr.setRequestHeader(
+      "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
+    );
+    xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
+    xhr.setRequestHeader("Pragma", "no-cache");
+  }
+  //xhr.timeout = 2 * 1000;
+  xhr.send();
+}
+
 // either cookie except has_js works
 // TODO somethig about xhr.accept("text") vs "document"
 
@@ -123,6 +169,7 @@ function updateMap(xhr) {
   const players = playerListElem.querySelectorAll("player");
   const picto = players[0].getAttribute("pictogram");
   console.log(picto);
+  getPlayerPage(picto);
 }
 
 getPlayers((xhr) => {
