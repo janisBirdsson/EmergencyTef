@@ -55,5 +55,12 @@ requestHttp(
   [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
 );
 
+requestHttp(
+  target + "/machine/playerpage.php?symbol=2Kdf4",
+  (xhr) => {console.log("success"); console.log(xhr.getAllResponseHeaders())},
+  (xhr) => {console.log("fail")},
+  [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
+);
+
 // [["Content-Security-Policy", "upgrade-insecure-requests"],
 // ["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
