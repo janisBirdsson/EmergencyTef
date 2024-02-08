@@ -83,6 +83,7 @@ function getPlayers(successCallback) {
       if(xhr.readyState == 4){
         var status = xhr.status;
         if(status >= 200 && status < 400 && xhr.HEADERS_RECEIVED){
+          console.log("getPlayers " + xhr.getAllResponseHeaders());
           successCallback(xhr);
         }else{
           console.log("Problem connecting to " + url + ". Status: " + status);
@@ -187,6 +188,7 @@ function getPlayerPage(name, successCallback) {
       if(xhr.readyState == 4){
         var status = xhr.status;
         if(status >= 200 && status < 400 && xhr.HEADERS_RECEIVED){
+          console.log("getPlayerPage " + xhr.getAllResponseHeaders());
           successCallback(xhr);
         }else{
           console.log("Problem connecting to " + url + ". Status: " + status);
