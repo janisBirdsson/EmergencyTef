@@ -114,7 +114,7 @@ function getPlayers(successCallback) {
   xhr.send();
 }
 
-function getPlayerPage(picto, successCallback = {}) {
+function getPlayerPage(picto, successCallback) {
   const url = "/machine/playerpage.php?symbol=" + picto;
   const method = "HEAD";
 
@@ -135,7 +135,8 @@ function getPlayerPage(picto, successCallback = {}) {
   }
 
   xhr.onreadystatechange = () => {
-    console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
+    // console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
+    successCallback(xhr);
   }
   
   xhr.ontimeout = () => {
@@ -169,11 +170,13 @@ function updateMap(xhr) {
   const players = playerListElem.querySelectorAll("player");
   const picto = players[0].getAttribute("pictogram");
   console.log(picto);
-  getPlayerPage(picto);
+  getPlayerPage((xhr) => {
+    console.log("Location: " + xhr.getResponseHeader('Location'));;
+  });
 }
 
 getPlayers((xhr) => {
   updateMap(xhr);
-})
+});
 
 // [["Content-Security-Policy", "upgrade-insecure-requests"],
