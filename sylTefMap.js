@@ -1169,7 +1169,7 @@ function SylTefMap(){
     // const url = "/machine/playerpage.php?symbol=" + picto;
     const method = "HEAD";
   
-    let resquestHeaders = [];
+    // let resquestHeaders = [];
   
     const noCache = true;
     let xhr = null;
@@ -1183,7 +1183,7 @@ function SylTefMap(){
       // console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
       const fullUrl = xhr.getResponseHeader('Location');
       if(fullUrl != null) {
-        console.log(fullUrl);
+        // console.log(fullUrl);
         const name = fullUrl.substring(39, fullUrl.length);
         successCallback(name);
       }
@@ -1195,11 +1195,11 @@ function SylTefMap(){
     xhr.open(method, url, true);
     // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
     // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
-    console.log(resquestHeaders);
-    resquestHeaders.forEach(pair => {
-      console.log(pair[0] + ":" + pair[1]);
-      xhr.setRequestHeader(pair[0], pair[1]);
-    });
+    // console.log(resquestHeaders);
+    // resquestHeaders.forEach(pair => {
+    //   // console.log(pair[0] + ":" + pair[1]);
+    //   xhr.setRequestHeader(pair[0], pair[1]);
+    // });
     if(noCache){
       xhr.setRequestHeader(
         "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
@@ -1219,7 +1219,7 @@ function SylTefMap(){
     //   resquestHeaders.push(["Cookie", cookie]);
     // });
     let resquestHeaders = [["Cookie", document.cookie]];
-    console.log(resquestHeaders);
+    // console.log(resquestHeaders);
   
     const noCache = true;
     let xhr = null;
@@ -1249,9 +1249,9 @@ function SylTefMap(){
     xhr.open(method, url, true);
     // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
     // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
-    console.log(resquestHeaders);
+    // console.log(resquestHeaders);
     resquestHeaders.forEach(pair => {
-      console.log(pair[0] + ":" + pair[1]);
+      // console.log(pair[0] + ":" + pair[1]);
       xhr.setRequestHeader(pair[0], pair[1]);
     });
     if(noCache){
@@ -1273,7 +1273,7 @@ function SylTefMap(){
     getPlayerName(
       entityData.userPageUrl,
       (name) => {
-        console.log(name);
+        // console.log(name);
         const bioUrl = "/community/" + name;
         entityData.userPageLinkElem.href = bioUrl;
         entityData.userPageUrl = bioUrl;
@@ -1292,7 +1292,7 @@ function SylTefMap(){
               if(pageTitles.length > 0){
                 let userNameUrl = playerPageTarget + pageTitles[0].innerHTML.replace(/\W/g, "");
                 //userNameUrl = userNameUrl.replace(/\W/g, "");
-                console.log(userNameUrl);
+                // console.log(userNameUrl);
                 const profileElems = 
                   pageElem.getElementsByClassName("custom_profiles");
                 if(profileElems.length > 0){
