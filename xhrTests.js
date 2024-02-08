@@ -216,7 +216,7 @@ function getPlayerPage(name, successCallback) {
 function addPlayer(url) {
   if(url != null) {
     console.log(url);
-    const name = url.substring(0, 39);
+    const name = url.substring(39, url.length);
     getPlayerPage(
       name,
       (xhr) => {
