@@ -54,31 +54,19 @@ console.log("Test!\n");
 const target = "https://" + window.location.hostname.substring(0, 29);
 // console.log("Host: \"" + target + "\"\n");
 
-// requestHttp(
-//   target + "/community/sylvanrah",
-//   (xhr) => {console.log("success"); console.log(xhr)},
-//   (xhr) => {console.log("fail")},
-//   [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
-// );
 
-requestHttp(
-  "GET",
-  target + "/machine/playerpage.php?symbol=2Kdf4",
-  (xhr) => {console.log("success"); console.log(xhr.getAllResponseHeaders())},
-  (xhr) => {console.log("fail")},
-  [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
-);
 
-requestHttp(
-  "HEAD",
-  target + "/machine/playerpage.php?symbol=2Kdf4",
-  (xhr) => {console.log("success"); console.log(xhr.getAllResponseHeaders())},
-  (xhr) => {console.log("fail")},
-  [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
-);
+
+function listCookies() {
+  var theCookies = document.cookie.split(';');
+  var aString = '';
+  for (var i = 1 ; i <= theCookies.length; i++) {
+      aString += i + ' ' + theCookies[i-1] + "\n";
+  }
+  return aString;
+}
 
 // either cookie except has_js works
 // TODO somethig about xhr.accept("text") vs "document"
 
 // [["Content-Security-Policy", "upgrade-insecure-requests"],
-// ["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
