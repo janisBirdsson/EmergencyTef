@@ -431,16 +431,6 @@ function SylTefMap(){
     addInitialMapEntities();
   }
   
-  function elemFromText(text){
-    let playerListElem = document.createElement("html");
-    playerListElem.innerHTML = text;
-    return playerListElem;
-  }
-  
-  function getPlayers(xhr){
-    return elemFromText(xhr.responseText);
-  }
-  
   // Not yet tested in other timezones
   function dateFromPlayerTime(playerTime){
     const year = parseInt(playerTime.substring(0, 4));
@@ -805,8 +795,9 @@ function SylTefMap(){
 
   function updateMapEntities(xhr){
     console.log(xhr);
-    console.log(xhr.responseText);
-    const playerList = getPlayers(xhr);
+    let playerList = document.createElement("html");
+    playerList.innerHTML = xhr.responseText;
+    console.log(playerList.innerHTML);
     console.log(playerList);
     if(!playerList.querySelector("player")){
       return;
