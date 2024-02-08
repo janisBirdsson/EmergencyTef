@@ -29,8 +29,8 @@ function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], 
   // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
   // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
   resquestHeaders.forEach(pair => {
-    console.log(pair.x + ":" + pair.v);
-    xhr.setRequestHeader(pair.x, pair.v);
+    console.log(pair[0] + ":" + pair[1]);
+    xhr.setRequestHeader(pair[0], pair[1]);
   });
   if(noCache){
     xhr.setRequestHeader(
@@ -43,8 +43,13 @@ function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], 
   xhr.send();
 }
 
-console.log("Test!\n");
+console.log("Test2!\n");
 const host = window.location.hostname.substring(0, 29);
 console.log("Host: \"" + host + "\"\n");
 
-requestHttp(host + "/community/sylvanrah", (xhr) => {}, (xhr) => {});
+requestHttp(
+  host + "/community/sylvanrah",
+  (xhr) => {console.log("success"); console.log(xhr)},
+  (xhr) => {console.log("fail")},
+  [[Content-Security-Policy, upgrade-insecure-requests]]
+);
