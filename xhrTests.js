@@ -68,6 +68,9 @@ function listCookies() {
 
 function getPlayers(successCallback) {
   const url = "/machine/playerstatus.php?action=get";
+  const method = "GET";
+  const resquestHeaders = [];
+  const noCache = true;
   let xhr = null;
   if(window.XMLHttpRequest){
     xhr = new XMLHttpRequest();
