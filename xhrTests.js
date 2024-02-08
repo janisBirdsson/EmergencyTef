@@ -1,4 +1,4 @@
-function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], noCache = false){
+function requestHttp(method, url, successCallback, errorCallback, resquestHeaders = [], noCache = false){
   let xhr = null;
   if(window.XMLHttpRequest){
     xhr = new XMLHttpRequest();
@@ -22,16 +22,16 @@ function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], 
   //   }
   // };
   xhr.onload = () => {
-    console.log("onload " + xhr.getResponseHeader('Location'));
+    console.log(method + "onload " + xhr.getResponseHeader('Location'));
   }
   xhr.onreadystatechange = () => {
-    console.log("onreadystatechange " + xhr.getResponseHeader('Location'));
+    console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
   }
   xhr.ontimeout = () => {
     console.log("Connection to " + url + "Timed out.");
     errorCallback(xhr);
   };
-  xhr.open("GET", url, true);
+  xhr.open(method, url, true);
   // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
   // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
   console.log(resquestHeaders);
@@ -62,6 +62,15 @@ const target = "https://" + window.location.hostname.substring(0, 29);
 // );
 
 requestHttp(
+  "GET",
+  target + "/machine/playerpage.php?symbol=2Kdf4",
+  (xhr) => {console.log("success"); console.log(xhr.getAllResponseHeaders())},
+  (xhr) => {console.log("fail")},
+  [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
+);
+
+requestHttp(
+  "HEAD",
   target + "/machine/playerpage.php?symbol=2Kdf4",
   (xhr) => {console.log("success"); console.log(xhr.getAllResponseHeaders())},
   (xhr) => {console.log("fail")},
@@ -69,6 +78,7 @@ requestHttp(
 );
 
 // either cookie except has_js works
+// TODO somethig about xhr.accept("text") vs "document"
 
 // [["Content-Security-Policy", "upgrade-insecure-requests"],
 // ["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
