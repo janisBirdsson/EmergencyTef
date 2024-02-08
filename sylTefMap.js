@@ -431,6 +431,12 @@ function SylTefMap(){
     addInitialMapEntities();
   }
   
+  function elemFromText(text){
+    let playerListElem = document.createElement("html");
+    playerListElem.innerHTML = text;
+    return playerListElem;
+  }
+  
   // Not yet tested in other timezones
   function dateFromPlayerTime(playerTime){
     const year = parseInt(playerTime.substring(0, 4));
