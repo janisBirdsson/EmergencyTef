@@ -118,13 +118,7 @@ function getPlayerPageURL(picto, successCallback) {
   const url = "/machine/playerpage.php?symbol=" + picto;
   const method = "HEAD";
 
-  // let resquestHeaders = [];
-  // let theCookies = document.cookie.split(';');
-  // theCookies.forEach(cookie => {
-  //   resquestHeaders.push(["Cookie", cookie]);
-  // });
-  let resquestHeaders = [["Cookie", document.cookie]];
-  console.log(resquestHeaders);
+  let resquestHeaders = [];
 
   const noCache = true;
   let xhr = null;
@@ -167,7 +161,14 @@ function getPlayerPageURL(picto, successCallback) {
 function getPlayerPage(name, successCallback) {
   const url = "/community/" + name;
   const method = "GET";
-  const resquestHeaders = [];
+  
+  // let theCookies = document.cookie.split(';');
+  // theCookies.forEach(cookie => {
+  //   resquestHeaders.push(["Cookie", cookie]);
+  // });
+  let resquestHeaders = [["Cookie", document.cookie]];
+  console.log(resquestHeaders);
+
   const noCache = true;
   let xhr = null;
   if(window.XMLHttpRequest){
@@ -231,10 +232,12 @@ function updateMap(xhr) {
   const players = playerListElem.querySelectorAll("player");
   const picto = players[0].getAttribute("pictogram");
   console.log(picto);
-  getPlayerPageURL((xhr) => {
-    console.log("Location: " + xhr.getResponseHeader('Location'));
-    addPlayer(xhr.getResponseHeader('Location'));
-  });
+  getPlayerPageURL(picto,
+    (xhr) => {
+      console.log("Location: " + xhr.getResponseHeader('Location'));
+      addPlayer(xhr.getResponseHeader('Location'));
+    }
+  );
 }
 
 getPlayers((xhr) => {
