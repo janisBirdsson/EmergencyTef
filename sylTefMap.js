@@ -1215,8 +1215,8 @@ function SylTefMap(){
       (name) => {
         console.log(name);
         const bioUrl = "/community/" + name;
-        entityData.userPageLinkElem = bioUrl;
-        entityData.userPageUrl.href = bioUrl;
+        entityData.userPageLinkElem.href = bioUrl;
+        entityData.userPageUrl = bioUrl;
       }
     );
     return;
