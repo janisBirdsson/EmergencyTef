@@ -794,11 +794,8 @@ function SylTefMap(){
   }
 
   function updateMapEntities(xhr){
-    console.log(xhr);
     let playerList = document.createElement("html");
     playerList.innerHTML = xhr.responseText;
-    console.log(playerList.innerHTML);
-    console.log(playerList);
     if(!playerList.querySelector("player")){
       return;
     }
@@ -1161,11 +1158,65 @@ function SylTefMap(){
     //entity.data.userDetailHeight = 
     return;
   }
+
+  function getPlayerName(url, successCallback) {
+    // const url = "/machine/playerpage.php?symbol=" + picto;
+    const method = "HEAD";
+  
+    let resquestHeaders = [];
+  
+    const noCache = true;
+    let xhr = null;
+    if(window.XMLHttpRequest){
+      xhr = new XMLHttpRequest();
+    }else{
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  
+    xhr.onreadystatechange = () => {
+      // console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
+      const fullUrl = xhr.getResponseHeader('Location');
+      if(fullUrl != null) {
+        console.log(fullUrl);
+        const name = fullUrl.substring(39, fullUrl.length);
+        successCallback(name);
+      }
+    }
+    
+    xhr.ontimeout = () => {
+      console.log("Connection to " + url + "Timed out.");
+    };
+    xhr.open(method, url, true);
+    // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
+    // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
+    console.log(resquestHeaders);
+    resquestHeaders.forEach(pair => {
+      console.log(pair[0] + ":" + pair[1]);
+      xhr.setRequestHeader(pair[0], pair[1]);
+    });
+    if(noCache){
+      xhr.setRequestHeader(
+        "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
+      );
+      xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
+      xhr.setRequestHeader("Pragma", "no-cache");
+    }
+    //xhr.timeout = 2 * 1000;
+    xhr.send();
+  }
   
   function findPlayerPageUrl(entity){
     const entityData = entity.data;
     const playerNotFoundText = "Could not find this player's page!";
     
+    //entityData.userPageUrl = playerPageUrl + entityData.pictoWord = playerpage.php?synbol=1234#
+    getPlayerName(
+      entityData.userPageUrl,
+      (name) => {
+        console.log(name);
+      }
+    );
+    return;
     requestHttp(
       entityData.userPageUrl, 
       (xhr) => {
