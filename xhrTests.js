@@ -28,6 +28,7 @@ function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], 
   xhr.open("GET", url, true);
   // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
   // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
+  console.log(resquestHeaders);
   resquestHeaders.forEach(pair => {
     console.log(pair[0] + ":" + pair[1]);
     xhr.setRequestHeader(pair[0], pair[1]);
@@ -44,12 +45,15 @@ function requestHttp(url, successCallback, errorCallback, resquestHeaders = [], 
 }
 
 console.log("Test2!\n");
-const host = window.location.hostname.substring(0, 29);
-console.log("Host: \"" + host + "\"\n");
+const target = "https://" + window.location.hostname.substring(0, 29);
+console.log("Host: \"" + target + "\"\n");
 
 requestHttp(
-  host + "/community/sylvanrah",
+  target + "/community/sylvanrah",
   (xhr) => {console.log("success"); console.log(xhr)},
   (xhr) => {console.log("fail")},
-  [["Content-Security-Policy", "upgrade-insecure-requests"]]
+  [["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
 );
+
+// [["Content-Security-Policy", "upgrade-insecure-requests"],
+// ["Cookie", "SESS3d506d9bc855ddcd3287f9913e63767c=5nthk9qrkek76ftrnu48jq5g42; has_js=1; SESS903465f0adcfe01479847cb3d1bb9c52=3k7gr84qkdlpa1pvqatpveq262"]]
