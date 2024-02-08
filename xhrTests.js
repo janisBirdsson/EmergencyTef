@@ -51,5 +51,5 @@ requestHttp(
   host + "/community/sylvanrah",
   (xhr) => {console.log("success"); console.log(xhr)},
   (xhr) => {console.log("fail")},
-  [[Content-Security-Policy, upgrade-insecure-requests]]
+  [["Content-Security-Policy", "upgrade-insecure-requests"]]
 );
