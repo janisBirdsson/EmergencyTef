@@ -1204,6 +1204,60 @@ function SylTefMap(){
     //xhr.timeout = 2 * 1000;
     xhr.send();
   }
+
+  function getPlayerPage(url, successCallback) {
+    const method = "GET";
+    
+    // let theCookies = document.cookie.split(';');
+    // theCookies.forEach(cookie => {
+    //   resquestHeaders.push(["Cookie", cookie]);
+    // });
+    let resquestHeaders = [["Cookie", document.cookie]];
+    console.log(resquestHeaders);
+  
+    const noCache = true;
+    let xhr = null;
+    if(window.XMLHttpRequest){
+      xhr = new XMLHttpRequest();
+    }else{
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xhr.onreadystatechange = () => {
+      try{
+        if(xhr.readyState == 4){
+          var status = xhr.status;
+          if(status >= 200 && status < 400 && xhr.HEADERS_RECEIVED){
+            successCallback(xhr);
+          }else{
+            console.log("Problem connecting to " + url + ". Status: " + status);
+          }
+        }
+      }catch(e){
+        console.log(e);
+      }
+    };
+    xhr.ontimeout = () => {
+      console.log("Connection to " + url + "Timed out.");
+    };
+    xhr.open(method, url, true);
+    // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
+    // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
+    console.log(resquestHeaders);
+    resquestHeaders.forEach(pair => {
+      console.log(pair[0] + ":" + pair[1]);
+      xhr.setRequestHeader(pair[0], pair[1]);
+    });
+    if(noCache){
+      xhr.setRequestHeader(
+        "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
+      );
+      xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
+      xhr.setRequestHeader("Pragma", "no-cache");
+    }
+    //xhr.timeout = 2 * 1000;
+    xhr.send();
+  }
   
   function findPlayerPageUrl(entity){
     const entityData = entity.data;
@@ -1217,6 +1271,85 @@ function SylTefMap(){
         const bioUrl = "/community/" + name;
         entityData.userPageLinkElem.href = bioUrl;
         entityData.userPageUrl = bioUrl;
+        getPlayerPage(
+          bioUrl,
+          (xhr) => {
+            const pageElem = elemFromText(xhr.responseText);
+            //con`st centerElems = pageElem.querySelectorAll("#center");
+            //if(centerElems.length > 0){
+              //const pageTitles = 
+              //  centerElems[0].getElementsByTagName("h2");
+            const centerElem = pageElem.querySelector("#center");
+            if(centerElem){
+              const pageTitles = 
+                centerElem.getElementsByTagName("h2");
+              if(pageTitles.length > 0){
+                let userNameUrl = playerPageTarget + pageTitles[0].innerHTML.replace(/\W/g, "");
+                //userNameUrl = userNameUrl.replace(/\W/g, "");
+                console.log(userNameUrl);
+                const profileElems = 
+                  pageElem.getElementsByClassName("custom_profiles");
+                if(profileElems.length > 0){
+                  entityData.userPageLinkElem.href = userNameUrl;
+                  entityData.userPageUrl = userNameUrl;
+                  try{
+                    populatePlayerEntityDetails(entity, profileElems[0]);
+                  }catch(e){
+                    displayErrorExeption(e);
+                  }
+                // }else{
+                  // let findPageRecursive = function(nameUrl, tries){
+                  //   if(tries > maxUserPageTries){
+                  //     entityData.userDetailText = "There are more than " +
+                  //       maxUserPageTries + 
+                  //       " pages with this player's name!<br />";
+                  //     return;
+                  //   }
+                  //   const url = nameUrl + "-" + (tries);
+                  //   requestHttp(
+                  //     url, 
+                  //     (xhr) => {
+                  //       const pageElem = elemFromText(xhr.responseText);
+                  //       const profileElems = 
+                  //         pageElem.getElementsByClassName("custom_profiles");
+                  //       if(profileElems.length > 0){
+                  //         entityData.userPageLinkElem.href = url;
+                  //         entityData.userPageUrl = url;
+                  //         try{
+                  //           populatePlayerEntityDetails(entity, profileElems[0]);
+                  //         }catch(e){
+                  //           displayErrorExeption(e);
+                  //         }
+                  //       // TODO force update detail box and href
+                  //       }else{
+                  //         findPageRecursive(nameUrl, tries + 1);
+                  //       }
+                  //     },
+                  //     (xhr) => {
+                  //       entityData.userDetailText = playerNotFoundText +
+                  //         "<br />The server may be down.";
+                  //       entityData.userPageLinkElem.href = userNameUrl;
+                  //       entityData.userPageUrl = userNameUrl;
+                  //     }
+                  //   );
+                  // };
+                  // findPageRecursive(userNameUrl, 0);
+                }
+                return;
+              }
+            }
+            const userNameUrl = xhr.responseURL;
+            if(userNameUrl){
+              entityData.userDetailText = playerNotFoundText + 
+                "<br />They may not have created a biography yet or you may be logged out.";
+              entityData.userPageLinkElem.href = userNameUrl;
+              entityData.userPageUrl = userNameUrl;
+            }else{
+              entityData.userDetailText = playerNotFoundText + 
+                "<br />Your browser might not support xhr.responseURL.";
+            }
+          }
+        );
       }
     );
     return;
