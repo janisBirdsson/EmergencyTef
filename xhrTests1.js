@@ -128,6 +128,10 @@ function getPlayerPageURL(picto, successCallback) {
     xhr = new ActiveXObject("Microsoft.XMLHTTP");
   }
 
+  xhr.onload = () => {
+    console.log(method + " onload " + xhr.getResponseHeader('Location'));
+  }
+
   xhr.onreadystatechange = () => {
     // console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
     successCallback(xhr);
