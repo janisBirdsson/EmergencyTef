@@ -807,6 +807,7 @@ function SylTefMap(){
     console.log(xhr);
     console.log(xhr.responseText);
     const playerList = getPlayers(xhr);
+    console.log(playerList);
     if(!playerList.querySelector("player")){
       return;
     }
