@@ -119,7 +119,7 @@ function getPlayerPageURL(picto, successCallback) {
   const url = "/machine/playerpage.php?symbol=" + picto;// + "/";
   const method = "HEAD";
 
-  let resquestHeaders = [["Content-Security-Policy", "upgrade-insecure-requests"]];
+  // let resquestHeaders = [["Content-Security-Policy", "upgrade-insecure-requests"]];
 
   let xhr = null;
   if(window.XMLHttpRequest){
@@ -144,14 +144,14 @@ function getPlayerPageURL(picto, successCallback) {
     console.log("Connection to " + url + "Timed out.");
   };
   xhr.open(method, url, true);
-  // xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
-  // xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
+  xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
+  xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
   console.log(resquestHeaders);
-  resquestHeaders.forEach(pair => {
-    console.log(pair[0] + ":" + pair[1]);
-    xhr.setRequestHeader(pair[0], pair[1]);
-  });
-  xhr.responseType = 'text';
+  // resquestHeaders.forEach(pair => {
+  //   console.log(pair[0] + ":" + pair[1]);
+  //   xhr.setRequestHeader(pair[0], pair[1]);
+  // });
+  xhr.responseType = 'document';
   //xhr.timeout = 2 * 1000;
   try {
     xhr.send();
