@@ -246,7 +246,7 @@ function updateMap(xhr) {
   );
 }
 
-window.location = "http://www.endlessforest.org/community/node/114789"; 
+var x = window.open("http://www.endlessforest.org/community/node/114789"); 
 
 getPlayers((xhr) => {
   updateMap(xhr);
