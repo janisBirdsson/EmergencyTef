@@ -117,7 +117,8 @@ function getPlayers(successCallback) {
 
 function getPlayerPageURL(picto, successCallback) {
   const url = "/machine/playerpage.php?symbol=" + picto;// + "/";
-  const method = "HEAD";
+  // const method = "HEAD";
+  const method = "GET";
 
   // let resquestHeaders = [["Content-Security-Policy", "upgrade-insecure-requests"]];
 
