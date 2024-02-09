@@ -246,8 +246,6 @@ function updateMap(xhr) {
   );
 }
 
-var x = window.open("http://www.endlessforest.org/community/node/114789"); 
-
 getPlayers((xhr) => {
   updateMap(xhr);
 });
