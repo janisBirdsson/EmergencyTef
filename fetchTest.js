@@ -1,6 +1,6 @@
-function test(url, redi) {
+function test(url, mode, redi) {
   console.log(url);
-  fetch(url, { method: 'POST', redirect: redi})
+  fetch(url, { method: mode, redirect: redi})
     .then(response => {
       // HTTP 301 response
       console.log("response.url =", response.url + "\n");
@@ -12,4 +12,4 @@ function test(url, redi) {
     });
 }
 
-test("/machine/playerpage.php?symbol=2Kdf4", "manual");
+test("/machine/playerpage.php?symbol=2Kdf4", "HEAD", "manual");
