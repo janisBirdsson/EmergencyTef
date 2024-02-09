@@ -146,7 +146,7 @@ function getPlayerPageURL(picto, successCallback) {
   xhr.open(method, url, true);
   xhr.setRequestHeader("Content-Security-Policy", "upgrade-insecure-requests");
   xhr.setRequestHeader("Upgrade-Insecure-Requests", "1");
-  console.log(resquestHeaders);
+  // console.log(resquestHeaders);
   // resquestHeaders.forEach(pair => {
   //   console.log(pair[0] + ":" + pair[1]);
   //   xhr.setRequestHeader(pair[0], pair[1]);
@@ -245,6 +245,8 @@ function updateMap(xhr) {
     }
   );
 }
+
+// window.location = "http://www.endlessforest.org/community/node/114789"; 
 
 getPlayers((xhr) => {
   updateMap(xhr);
