@@ -131,11 +131,13 @@ function getPlayerPageURL(picto, successCallback) {
 
   xhr.onload = () => {
     console.log(method + " onload " + xhr.getResponseHeader('Location'));
+    console.log("responseURL " + xhr.responseURL);
   }
 
   xhr.onreadystatechange = () => {
-    console.log(method + " onreadystatechange full " + xhr.getAllResponseHeaders());
-    console.log(method + " onreadystatechange " + xhr.getResponseHeader('Location'));
+    console.log("getPlayerPageURL getAllResponseHeaders " + xhr.getAllResponseHeaders());
+    console.log("getPlayerPageURL " + xhr.getResponseHeader('Location'));
+    console.log("responseURL " + xhr.responseURL);
     successCallback(xhr);
   }
   
