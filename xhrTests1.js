@@ -161,7 +161,11 @@ function getPlayerPageURL(picto, successCallback) {
   }
   xhr.responseType = 'text';
   //xhr.timeout = 2 * 1000;
-  xhr.send();
+  try {
+    xhr.send();
+  } catch(e) {
+    console.log(e);
+  }
 }
 
 // either cookie except has_js works
