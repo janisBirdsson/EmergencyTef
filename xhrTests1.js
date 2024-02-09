@@ -116,12 +116,12 @@ function getPlayers(successCallback) {
 }
 
 function getPlayerPageURL(picto, successCallback) {
-  const url = "/machine/playerpage.php?symbol=" + picto;
+  const url = "/machine/playerpage.php?symbol=" + picto + "/";
   const method = "HEAD";
 
   let resquestHeaders = [];
 
-  const noCache = true;
+  const noCache = false;
   let xhr = null;
   if(window.XMLHttpRequest){
     xhr = new XMLHttpRequest();
