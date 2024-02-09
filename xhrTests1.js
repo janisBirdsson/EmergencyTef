@@ -153,11 +153,11 @@ function getPlayerPageURL(picto, successCallback) {
   // });
   xhr.responseType = 'document';
   //xhr.timeout = 2 * 1000;
-  try {
+  // try {
     xhr.send();
-  } catch(e) {
-    console.log(e);
-  }
+  // } catch(e) {
+  //   console.log(e);
+  // }
 }
 
 // either cookie except has_js works
