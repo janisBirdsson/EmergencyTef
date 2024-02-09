@@ -1,6 +1,6 @@
-function test(url) {
+function test(url, redi) {
   console.log(url);
-  fetch(url, { method: 'POST', redirect: 'manual'})
+  fetch(url, { method: 'POST', redirect: redi})
     .then(response => {
       // HTTP 301 response
       console.log("response.url =", response.url);
@@ -10,4 +10,4 @@ function test(url) {
     });
 }
 
-test("/playerpage.php?symbol=2Kdf4");
+test("/machine/playerpage.php?symbol=2Kdf4", "follow");
