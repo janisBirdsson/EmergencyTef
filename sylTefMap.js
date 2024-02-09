@@ -1218,10 +1218,9 @@ function SylTefMap(){
     // theCookies.forEach(cookie => {
     //   resquestHeaders.push(["Cookie", cookie]);
     // });
-    let resquestHeaders = [["Cookie", document.cookie]];
+    let resquestHeaders = [["Cookie", document.cookie]]; // to make Drupal happy. it needs SESS* cookies for https - good place to look if the map breaks in future
     // console.log(resquestHeaders);
   
-    const noCache = true;
     let xhr = null;
     if(window.XMLHttpRequest){
       xhr = new XMLHttpRequest();
@@ -1254,13 +1253,6 @@ function SylTefMap(){
       // console.log(pair[0] + ":" + pair[1]);
       xhr.setRequestHeader(pair[0], pair[1]);
     });
-    if(noCache){
-      xhr.setRequestHeader(
-        "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
-      );
-      xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
-      xhr.setRequestHeader("Pragma", "no-cache");
-    }
     //xhr.timeout = 2 * 1000;
     xhr.send();
   }
