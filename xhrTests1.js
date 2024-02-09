@@ -159,6 +159,7 @@ function getPlayerPageURL(picto, successCallback) {
     xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
     xhr.setRequestHeader("Pragma", "no-cache");
   }
+  xhr.responseType = 'text';
   //xhr.timeout = 2 * 1000;
   xhr.send();
 }
