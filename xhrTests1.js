@@ -119,9 +119,8 @@ function getPlayerPageURL(picto, successCallback) {
   const url = "/machine/playerpage.php?symbol=" + picto;// + "/";
   const method = "HEAD";
 
-  let resquestHeaders = [];
+  let resquestHeaders = [["Content-Security-Policy", "upgrade-insecure-requests"]];
 
-  const noCache = false;
   let xhr = null;
   if(window.XMLHttpRequest){
     xhr = new XMLHttpRequest();
@@ -152,13 +151,6 @@ function getPlayerPageURL(picto, successCallback) {
     console.log(pair[0] + ":" + pair[1]);
     xhr.setRequestHeader(pair[0], pair[1]);
   });
-  if(noCache){
-    xhr.setRequestHeader(
-      "Cache-Control", "no-cache, no-store, max-age=0, must-revalidate"
-    );
-    xhr.setRequestHeader("Expires", "Tue, 01 Jan 1980 1:00:00 GMT");
-    xhr.setRequestHeader("Pragma", "no-cache");
-  }
   xhr.responseType = 'text';
   //xhr.timeout = 2 * 1000;
   try {
