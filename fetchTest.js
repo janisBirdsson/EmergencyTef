@@ -10,4 +10,4 @@ function test(url, redi) {
     });
 }
 
-test("/machine/playerpage.php?symbol=2Kdf4", "follow");
+test("/machine/playerpage.php?symbol=2Kdf4", "manual");
