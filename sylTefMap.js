@@ -1727,7 +1727,7 @@ function SylTefMap(){
   }
 
   function getPlayers(successCallback, errorCallback){
-    const url = "/machine/playerstatus.php?action=get";
+    const url = "/map/mapdata.txt";
     let xhr = null;
     if(window.XMLHttpRequest){
       xhr = new XMLHttpRequest();
