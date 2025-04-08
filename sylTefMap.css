@@ -1,0 +1,233 @@
+#syl_map{
+    position: relative;
+    background-image: url("assets/floor.png");
+    /* background-image: url("https://dl.dropbox.com/s/moocqwrislv676a/floor3.png?dl=0"); */
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    font-size: 150%;
+    width: 90vmin;
+    height: 90vmin;
+    overflow: hidden;
+}
+
+#syl_map_overlay{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#syl_player_count{
+    font-size: 130%;
+    text-align: center;
+    display: block;
+}
+
+#syl_player_preview_container{
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    box-shadow: 0 0 0.25em 0.1em #000000;
+    background: rgba(0, 0, 0, 0.8);
+    transition: transform 0.35s, left 1.2s, top 1.2s;
+}
+
+#syl_player_preview_container h4{
+    display: block;
+    overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    font-size: 60%;
+    font-weight: bold;
+    text-align: left;
+    color: #00D7A7;
+}
+
+#syl_player_preview{
+    display: block;
+    height: auto;
+    padding-bottom: 0.3em;
+    max-height: 90%;
+}
+
+#syl_player_preview .avatar{
+    float: right;
+    width: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#syl_player_preview a{
+    color: inherit;
+}
+
+#syl_player_preview .text{
+    font-size: 50%;
+    text-align: left;
+    overflow: hidden;
+}
+
+#syl_player_preview  dt{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #47CB47;
+}
+
+#syl_player_preview  dd{
+    line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    white-space: nowrap;
+    margin: 0 0 0 1.2em;
+}
+
+#syl_map_error_box{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #BBBBBB;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#syl_map_settings_box{
+    margin: auto;
+    width: 42%;
+    background-color: #101010;
+    border-style: solid;
+    border-color: FEEB9D;
+    border-width: 1px;
+    padding: 1em;
+}
+
+#syl_map_settings_box .center{
+    position: absolute;
+    left: 50%;
+    width: 0%;
+    overflow: visible;
+}
+
+#syl_map_settings_box .setting_button{
+    width: auto;
+    background-color: #606060;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #404040;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.syl_map_group_center{
+    box-shadow: 0 0 1em 0.3em #000000;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    transition: transform 0.35s;
+    /*-webkit-transition: transform 0.35s;
+    -moz-transition: transform 0.35s;
+    -o-transition: transform 0.35s;*/
+    transition-timing-function: ease-in-out;
+    /*-moz-transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;*/
+}
+
+.syl_glyph{
+    width: 100%;
+    height: 100%;
+    background-size: 200%;
+    /* background-size: 220%; messes up alignment for unknown reasons */
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.syl_glyph.gen1{
+    background-image: url("assets/indexed_sm_gen1.png");
+}
+
+.syl_glyph.gen2{
+    background-image: url("assets/indexed_sm_gen2.png");
+}
+
+.syl_glyph.gen3{
+    background-image: url("assets/indexed_sm_gen3.png");
+}
+
+.syl_glyph.gen4{
+    background-image: url("assets/indexed_sm_gen4.png");
+}
+
+.syl_glyph.gen5{
+    background-image: url("assets/indexed_sm_gen5.png");
+}
+
+.syl_map_location{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* -o-background-size = 100% 100%; */
+    /* -moz-background-size = 100% 100%; */
+    /* -webkit-background-size = 100% 100%; */
+}
+
+.syl_map_location.de_drinkplaats{
+    background-image: url("assets/location_de_drinkplaats.png");
+}
+
+.syl_map_location.ename{
+    background-image: url("assets/location_ename.png");
+}
+
+.syl_map_location.oak{
+    background-image: url("assets/location_oak.png");
+}
+
+.syl_map_location.playground{
+    background-image: url("assets/location_playground.png");
+}
+
+.syl_map_location.pond{
+    background-image: url("assets/location_pond.png");
+}
+
+.syl_map_location.twin_gods{
+    background-image: url("assets/location_twin_gods.png");
+}
+
+.syl_map_entity_link{
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+}
+
+.syl_map_entity{
+    display: content;
+    position: absolute;
+    top: 0%;
+    left: 0%; 
+    transition: transform 0.35s, left 1.2s, top 1.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.syl_map_entity_player_status{
+    left: 0%;
+    /* top: -50%; */
+    top: -45%;
+    position: absolute;
+    pointer-events: none;
+    /* z-index: 500; */
+}
