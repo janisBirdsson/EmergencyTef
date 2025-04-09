@@ -1727,7 +1727,7 @@ function SylTefMap(){
   }
 
   function getPlayers(successCallback, errorCallback){
-    const url = "https://tale-of-tales.com/TheEndlessForest/map/mapdata.txt";
+    const url = "/map/mapdata.txt";
     let xhr = null;
     if(window.XMLHttpRequest){
       xhr = new XMLHttpRequest();
